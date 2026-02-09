@@ -560,6 +560,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetDataBtn = document.getElementById('resetDataBtn');
     const editCriteriaContainer = document.getElementById('editCriteriaContainer');
 
+    // Sub-criteria UI Elements
+    const subCriteriaModal = document.getElementById('subCriteriaModal');
+    const closeSubCriteriaBtn = document.getElementById('closeSubCriteriaBtn');
+    const applySubCriteriaBtn = document.getElementById('applySubCriteriaBtn');
+    const chkSubApplicant = document.getElementById('chkSubApplicant');
+    const chkSubPairDebt = document.getElementById('chkSubPairDebt');
+    const chkSubCoBorrower = document.getElementById('chkSubCoBorrower');
+    const chkSubLeave = document.getElementById('chkSubLeave');
+
+    const subFilterInputs = [chkSubApplicant, chkSubPairDebt, chkSubCoBorrower, chkSubLeave];
+
     const filterInputs = filterMapping.map(m => document.getElementById(m.id));
 
     // --- Main Table Functions ---
@@ -629,6 +640,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!criteriaItem || !condition.allowed.includes(criteriaItem.status)) {
                         matchesCheckbox = false;
                         break;
+                    }
+
+                    // --- Sub-criteria Filtering logic ---
+                    // Only apply if it's one of the three work types and sub-filters are active
+                    if (['contract', 'dispatch', 'part_time'].includes(condition.key)) {
+                        const sub = criteriaItem.sub_criteria;
+                        if (sub) {
+                            if (chkSubApplicant.checked && !sub.applicant) { matchesCheckbox = false; break; }
+                            if (chkSubPairDebt.checked && !sub.spouse) { matchesCheckbox = false; break; }
+                            if (chkSubCoBorrower.checked && !sub.aggregation) { matchesCheckbox = false; break; }
+                            if (chkSubLeave.checked && !sub.leave) { matchesCheckbox = false; break; }
+                        }
                     }
                 }
             }
@@ -1224,6 +1247,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (filterInputs && filterInputs.length > 0) {
         filterInputs.forEach(input => {
+            if (input) {
+                input.addEventListener('change', () => {
+                    // Logic to show popup when specific work types are checked
+                    if (['chkContract', 'chkDispatch', 'chkPartTime'].includes(input.id) && input.checked) {
+                        subCriteriaModal.style.display = 'block';
+                    }
+                    renderTable();
+                });
+            }
+        });
+    }
+
+    // Sub-criteria Modal Interactions
+    if (closeSubCriteriaBtn) {
+        closeSubCriteriaBtn.onclick = () => {
+            subCriteriaModal.style.display = 'none';
+        };
+    }
+
+    if (applySubCriteriaBtn) {
+        applySubCriteriaBtn.onclick = () => {
+            subCriteriaModal.style.display = 'none';
+            renderTable();
+        };
+    }
+
+    if (subFilterInputs && subFilterInputs.length > 0) {
+        subFilterInputs.forEach(input => {
             if (input) input.addEventListener('change', renderTable);
         });
     }
@@ -1238,6 +1289,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onclick = (event) => {
         if (modal && event.target == modal) modal.style.display = 'none';
         if (settingsModal && event.target == settingsModal) settingsModal.style.display = 'none';
+        if (subCriteriaModal && event.target == subCriteriaModal) subCriteriaModal.style.display = 'none';
     };
 
     // Settings Navigation/Interaction

@@ -696,6 +696,21 @@ th.fixed-col {
     color: var(--text-muted);
 }
 
+.sub-criteria-modal {
+    max-width: 500px;
+}
+
+.sub-filter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.sub-filter-grid .checkbox-chip {
+    justify-content: flex-start;
+    padding: 0.75rem;
+}
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 1024px) {
     .filter-categories {

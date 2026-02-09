@@ -148,6 +148,41 @@
         </div>
     </div>
 
+    <div id="subCriteriaModal" class="modal">
+        <div class="modal-content sub-criteria-modal">
+            <div class="modal-header">
+                <h2 style="margin:0; font-size:1.2rem;">追加条件で絞り込む</h2>
+                <span class="close-button" id="closeSubCriteriaBtn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                    チェックした種別（契約・派遣・パート）に対して、以下の条件を満たす銀行のみを表示します。
+                </p>
+                <div class="sub-filter-grid">
+                    <label class="checkbox-chip">
+                        <input type="checkbox" id="chkSubApplicant">
+                        <span>申込者として可</span>
+                    </label>
+                    <label class="checkbox-chip">
+                        <input type="checkbox" id="chkSubPairDebt">
+                        <span>ペア・連帯債務</span>
+                    </label>
+                    <label class="checkbox-chip">
+                        <input type="checkbox" id="chkSubCoBorrower">
+                        <span>収入合算者</span>
+                    </label>
+                    <label class="checkbox-chip">
+                        <input type="checkbox" id="chkSubLeave">
+                        <span>育産休でも可</span>
+                    </label>
+                </div>
+                <div style="margin-top: 2rem; display: flex; justify-content: center;">
+                    <button id="applySubCriteriaBtn" class="save-btn" style="padding: 0.8rem 2.5rem;">検索に反映する</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
