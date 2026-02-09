@@ -260,26 +260,6 @@ const defaultBanksData = [
         }
     },
     {
-        name: "千葉銀行",
-        criteria: {
-            contract: { status: "conditional", label: "3年", details: "原則3年以上。" },
-            dispatch: { status: "conditional", label: "3年", details: "原則3年以上。" },
-            part_time: { status: "conditional", label: "合算", details: "合算者としてなら相談可。" },
-            leave: { status: "ok", label: "○", details: "育休中の元金据置が可能。" },
-            tenure: { status: "standard", label: "1年", details: "原則1年以上。" },
-            foreigner: { status: "pr_required", label: "必須", details: "永住権必須。" },
-            self_employed: { status: "strict", label: "3期", details: "3期分申告要。" },
-            land_build_split: { status: "ok", label: "○", details: "分割融資に対応。" },
-            build_split: { status: "ok", label: "○", details: "対応。" },
-            bridging: { status: "ok", label: "○", details: "つなぎ融資対応。" },
-            defer_order: { status: "ok", label: "○", details: "最大2年の元金据置（育休等）が可能。" },
-            sale_loss: { status: "ok", label: "○", details: "対応。" },
-            defer_replace: { status: "ok", label: "○", details: "対応。" },
-            equal_principal: { status: "ok", label: "○", details: "可。" },
-            joint_insurance: { status: "ok", label: "○", details: "連生がん団信あり。" }
-        }
-    },
-    {
         name: "群馬銀行",
         criteria: {
             contract: { status: "conditional", label: "1年", details: "勤続1年以上推奨。" },
