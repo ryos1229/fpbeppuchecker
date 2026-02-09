@@ -1248,13 +1248,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (filterInputs && filterInputs.length > 0) {
         filterInputs.forEach(input => {
             if (input) {
-                // Use 'click' or 'change' for checkboxes. 'click' is often more reliable for immediate popup triggers on mobile.
-                input.addEventListener('click', () => {
+                // Safari and some mobile browsers handle 'click' on labels/chips differently.
+                // 'change' or 'input' is often more consistent for the underlying input element.
+                const handleInteraction = () => {
                     // Logic to show popup when specific work types are checked
                     if (['chkContract', 'chkDispatch', 'chkPartTime'].includes(input.id) && input.checked) {
-                        subCriteriaModal.style.display = 'block';
+                        // Small delay to ensure browser decoration/state is finished
+                        setTimeout(() => {
+                            subCriteriaModal.style.display = 'block';
+                        }, 10);
                     }
                     renderTable();
+                };
+
+                input.addEventListener('change', handleInteraction);
+                // Also add click as a fallback for some environments
+                input.addEventListener('click', (e) => {
+                    // Avoid double execution with change event
+                    if (e.pointerType === 'mouse' || e.pointerType === 'touch') {
+                        // renderTable is already handled by change
+                    }
                 });
             }
         });

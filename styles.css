@@ -149,6 +149,7 @@ body {
     width: 0.9rem;
     height: 0.9rem;
     accent-color: var(--accent);
+    cursor: pointer;
 }
 
 .checkbox-chip:has(input:checked) {
