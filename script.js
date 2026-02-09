@@ -1248,7 +1248,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (filterInputs && filterInputs.length > 0) {
         filterInputs.forEach(input => {
             if (input) {
-                input.addEventListener('change', () => {
+                // Use 'click' or 'change' for checkboxes. 'click' is often more reliable for immediate popup triggers on mobile.
+                input.addEventListener('click', () => {
                     // Logic to show popup when specific work types are checked
                     if (['chkContract', 'chkDispatch', 'chkPartTime'].includes(input.id) && input.checked) {
                         subCriteriaModal.style.display = 'block';
@@ -1286,11 +1287,17 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    window.onclick = (event) => {
+    const handleModalClick = (event) => {
         if (modal && event.target == modal) modal.style.display = 'none';
         if (settingsModal && event.target == settingsModal) settingsModal.style.display = 'none';
         if (subCriteriaModal && event.target == subCriteriaModal) subCriteriaModal.style.display = 'none';
     };
+    window.addEventListener('click', handleModalClick);
+    window.addEventListener('touchstart', (e) => {
+        if (e.target.classList.contains('modal')) {
+            handleModalClick(e);
+        }
+    });
 
     // Settings Navigation/Interaction
     if (openSettingsBtn) {
