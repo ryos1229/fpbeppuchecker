@@ -642,15 +642,25 @@ document.addEventListener('DOMContentLoaded', () => {
                         break;
                     }
 
-                    // --- Sub-criteria Filtering logic ---
-                    // Only apply if it's one of the three work types and sub-filters are active
+                    // --- Sub-criteria Filtering logic (OR Logic) ---
+                    // Matches if AT LEAST ONE of the selected sub-filters is true.
                     if (['contract', 'dispatch', 'part_time'].includes(condition.key)) {
                         const sub = criteriaItem.sub_criteria;
                         if (sub) {
-                            if (chkSubApplicant.checked && !sub.applicant) { matchesCheckbox = false; break; }
-                            if (chkSubPairDebt.checked && !sub.spouse) { matchesCheckbox = false; break; }
-                            if (chkSubCoBorrower.checked && !sub.aggregation) { matchesCheckbox = false; break; }
-                            if (chkSubLeave.checked && !sub.leave) { matchesCheckbox = false; break; }
+                            const isSubFilterActive = chkSubApplicant.checked || chkSubPairDebt.checked || chkSubCoBorrower.checked || chkSubLeave.checked;
+
+                            if (isSubFilterActive) {
+                                let matchAnySub = false;
+                                if (chkSubApplicant.checked && sub.applicant) matchAnySub = true;
+                                if (chkSubPairDebt.checked && sub.spouse) matchAnySub = true;
+                                if (chkSubCoBorrower.checked && sub.aggregation) matchAnySub = true;
+                                if (chkSubLeave.checked && sub.leave) matchAnySub = true;
+
+                                if (!matchAnySub) {
+                                    matchesCheckbox = false;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
