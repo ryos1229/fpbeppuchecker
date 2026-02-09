@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>銀行データ設定 - FP別府くん要件チェッカー</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .settings-page {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .settings-card {
+            background: white;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-premium);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .settings-header-bar {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .autosave-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-dark);
+            background: #ecfdf5;
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← 戻る</a>
+            <h1>銀行データ設定</h1>
+            <div style="width: 60px;"></div> <!-- Spacer for centering -->
+        </div>
+    </header>
+
+    <main class="settings-page">
+        <div class="settings-card">
+            <div class="settings-header-bar">
+                <div class="io-btn-group">
+                    <button id="exportDataBtn" class="io-btn">データを書き出し</button>
+                    <button id="importDataBtn" class="io-btn">データを取り込み</button>
+                </div>
+                <input type="file" id="importFileInput" style="display: none;" accept=".json">
+                <button id="resetDataBtn" class="reset-btn" style="margin: 0; padding: 0.5rem 1rem;">初期データにリセット</button>
+            </div>
+
+            <div class="settings-layout">
+                <div class="settings-sidebar">
+                    <button id="addNewBankBtn" class="add-btn" style="margin-bottom: 1rem;">+ 新規銀行追加</button>
+                    <div
+                        style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
+                        登録済みの銀行</div>
+                    <ul id="settingsBankList" class="settings-bank-list"></ul>
+                </div>
+
+                <div class="settings-main">
+                    <div id="bankEditForm" style="display:none;">
+                        <input type="hidden" id="editBankIndex">
+                        <div class="form-group">
+                            <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
+                                <label class="form-label" style="margin-bottom: 0;">銀行名</label>
+                                <div id="autosaveIndicator" class="autosave-indicator">
+                                    <span>●</span> 自動保存済み
+                                </div>
+                            </div>
+                            <input type="text" id="editBankName" class="form-input"
+                                style="font-weight: 800; font-size: 1.25rem;">
+                        </div>
+
+                        <div id="editCriteriaContainer">
+                            <!-- Criteria fields injected by JS -->
+                        </div>
+
+                        <div class="form-actions"
+                            style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end;">
+                            <button id="deleteBankBtn" class="delete-btn">この銀行を削除</button>
+                        </div>
+                    </div>
+                    <div id="settingsPlaceholder" class="settings-placeholder" style="margin-top: 10rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🏦</div>
+                        左側のリストから銀行を選択するか、<br>「新規銀行追加」をクリックして編集を開始してください。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

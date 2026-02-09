@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FP別府くん要件チェッカー</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <h1>FP別府くん要件チェッカー</h1>
+            <p>各金融機関の申込要件を一目で比較</p>
+        </div>
+        <button id="openSettingsBtn" class="settings-btn">⚙️ データ設定</button>
+    </header>
+
+    <main class="main-content">
+        <div class="filter-controls">
+            <div class="filter-categories">
+                <div class="filter-row">
+                    <span class="category-label">属性・ステータス</span>
+                    <div class="search-conditions">
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkContract">
+                            <span>契約社員</span>
+                        </label>
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkDispatch">
+                            <span>派遣社員</span>
+                        </label>
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkPartTime">
+                            <span>パート・アルバイト</span>
+                        </label>
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkSelfEmployed">
+                            <span>自営業</span>
+                        </label>
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkLeave">
+                            <span>育産休</span>
+                        </label>
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkTenure">
+                            <span>勤続1年未満</span>
+                        </label>
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkForeigner">
+                            <span>外国籍</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-row">
+                    <span class="category-label">注文住宅・分割実行</span>
+                    <div class="search-conditions">
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkLandBuildSplit">
+                            <span>土地建物分割</span>
+                        </label>
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkBuildSplit">
+                            <span>建物分割</span>
+                        </label>
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkBridging">
+                            <span>つなぎ融資</span>
+                        </label>
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkDeferOrder">
+                            <span>元金据置</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-row">
+                    <span class="category-label">買い替え・住み替え</span>
+                    <div class="search-conditions">
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkSaleLoss">
+                            <span>売却損対応</span>
+                        </label>
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkDeferReplace">
+                            <span>据置(住替)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-row">
+                    <span class="category-label">その他・高度機能</span>
+                    <div class="search-conditions">
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkEqualPrincipal">
+                            <span>元金均等</span>
+                        </label>
+                        <label class="checkbox-chip">
+                            <input type="checkbox" id="chkJointInsurance">
+                            <span>連生団信</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-input-wrapper">
+                <input type="text" id="bankSearch" placeholder="銀行名やキーワードで絞り込む..." class="search-input">
+            </div>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+            <p>絞り込み条件を選択すると、該当する銀行の特色が表示されます。</p>
+        </div>
+
+        <div class="table-container" id="tableContainer" style="display: none;">
+            <table id="requirementsTable">
+                <thead>
+                    <tr>
+                        <th class="fixed-col">金融機関</th>
+                        <th>契約社員</th>
+                        <th>派遣社員</th>
+                        <th>パート・アルバイト</th>
+                        <th>育休・産休中</th>
+                        <th>勤続年数<br><span class="sub-header">転職・短期間</span></th>
+                        <th>外国人<br><span class="sub-header">永住権有無</span></th>
+                        <th>個人事業主<br><span class="sub-header">自営業</span></th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Javascript renders rows here -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalBankName" style="margin:0; font-size:1.4rem;"></h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div id="modalBody" class="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
