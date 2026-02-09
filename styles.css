@@ -853,4 +853,48 @@ th.fixed-col {
         padding: 0.4rem;
         font-size: 0.75rem;
     }
+
+    /* Mobile Popup Edit Mode */
+    body.edit-open .settings-main {
+        display: block !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 3000;
+        background: white;
+        padding-top: 2rem;
+    }
+
+    .mobile-close-btn {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .mobile-close-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        /* Prevent background scroll when edit is open */
+        body.edit-open {
+            overflow: hidden;
+        }
+
+        #bankEditForm {
+            padding-bottom: 5rem;
+            /* Extra space at bottom */
+        }
+    }
 }

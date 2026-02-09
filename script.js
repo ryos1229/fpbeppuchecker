@@ -912,6 +912,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.getElementById('editBankIndex')) document.getElementById('editBankIndex').value = index;
         if (document.getElementById('editBankName')) document.getElementById('editBankName').value = bank.name;
 
+        // Mobile Popup Handling
+        document.body.classList.add('edit-open');
+
         if (settingsPlaceholder) settingsPlaceholder.style.display = 'none';
         if (bankEditForm) bankEditForm.style.display = 'block';
 
@@ -991,6 +994,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const index = -1;
         document.getElementById('editBankIndex').value = index;
         document.getElementById('editBankName').value = "新規銀行";
+
+        // Mobile Popup Handling
+        document.body.classList.add('edit-open');
 
         editCriteriaContainer.innerHTML = '';
         const criteriaCategories = {
@@ -1152,9 +1158,14 @@ document.addEventListener('DOMContentLoaded', () => {
             banksData.splice(index, 1);
             saveBanks();
             renderSettingsList();
+            closeMobileEdit(); // Go back to list
             bankEditForm.style.display = 'none';
             settingsPlaceholder.style.display = 'block';
         }
+    }
+
+    function closeMobileEdit() {
+        document.body.classList.remove('edit-open');
     }
 
     // --- Import / Export Functions ---
@@ -1247,6 +1258,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addNewBankBtn) addNewBankBtn.onclick = createNewBank;
     if (deleteBankBtn) deleteBankBtn.onclick = deleteBank;
     if (resetDataBtn) resetDataBtn.onclick = resetBanks;
+
+    const closeEditBtn = document.getElementById('closeEditBtn');
+    if (closeEditBtn) closeEditBtn.onclick = closeMobileEdit;
 
     // Auto-save in Settings
     if (bankEditForm) {

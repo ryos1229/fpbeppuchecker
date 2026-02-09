@@ -103,15 +103,19 @@
                 <div class="settings-main">
                     <div id="bankEditForm" style="display:none;">
                         <input type="hidden" id="editBankIndex">
-                        <div class="form-group">
-                            <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                                <label class="form-label" style="margin-bottom: 0;">銀行名</label>
-                                <div id="autosaveIndicator" class="autosave-indicator">
-                                    <span>●</span> 自動保存済み
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem;">
+                            <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
+                                    <label class="form-label" style="margin-bottom: 0;">銀行名</label>
+                                    <div id="autosaveIndicator" class="autosave-indicator">
+                                        <span>●</span> 自動保存済み
+                                    </div>
                                 </div>
+                                <input type="text" id="editBankName" class="form-input"
+                                    style="font-weight: 800; font-size: 1.25rem;">
                             </div>
-                            <input type="text" id="editBankName" class="form-input"
-                                style="font-weight: 800; font-size: 1.25rem;">
+                            <button id="closeEditBtn" class="mobile-close-btn">×</button>
                         </div>
 
                         <div id="editCriteriaContainer">
