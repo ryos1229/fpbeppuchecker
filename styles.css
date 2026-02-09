@@ -790,6 +790,67 @@ th.fixed-col {
     border-radius: 10px;
 }
 
-.table-container::-webkit-scrollbar-thumb:hover {
-    background: rgba(44, 62, 80, 0.4);
+@media (max-width: 768px) {
+    .settings-page {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+
+    .settings-card {
+        border-radius: 0;
+        border: none;
+    }
+
+    .settings-sidebar {
+        width: 100px;
+        /* Much narrower sidebar for mobile */
+        padding: 1rem 0.5rem;
+    }
+
+    .settings-main {
+        padding: 1rem;
+        /* More space for edit area */
+    }
+
+    .settings-bank-list li {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.75rem;
+        /* Smaller list items */
+        border-radius: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .add-btn {
+        padding: 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    /* Bank name adjustment in settings */
+    #editBankName {
+        font-size: 1rem !important;
+        /* Smaller text */
+        padding: 0.6rem 0.8rem !important;
+    }
+
+    .criteria-section {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .settings-category-header {
+        margin: 1.5rem 0 1rem;
+        font-size: 0.9rem;
+    }
+
+    .radio-grid {
+        gap: 0.4rem;
+    }
+
+    .radio-option {
+        padding: 0.4rem;
+        font-size: 0.75rem;
+    }
 }
